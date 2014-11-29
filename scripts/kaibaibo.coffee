@@ -10,17 +10,18 @@
 # Author:
 #   missu
 
- timer = [3,2,1]
- choice = [Rock, Paper, Scissors]
+timer = [1,2,3]
+choice = ['Rock', 'Paper', 'Scissors']
 
- module.export = (robot) ->
-   robot.hear /kaibaibo/i, (msg) ->
-       msg.send "Okay"
-       intervalID = setinterval ->
-                     index = 2
-                     msg.send timer[index]
-                     if index == 0
+module.exports = (robot) ->
+  robot.respond /kaibaibo/i, (msg) ->
+     index = 2
+     msg.send "Okay"
+     intervalID = setInterval ->
+                      msg.send timer[index]
+                      if index == 0
                         clearInterval intervalID
                         msg.send msg.random choice
-                    , 1000
-    return
+                      index--
+                  , 1000
+    
